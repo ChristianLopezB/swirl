@@ -44,7 +44,9 @@ parse_content.yaml <- function(file, e){
     }
     temp
   }
-  raw_yaml <- yaml.load_file(file)
+  con <- file(file, encoding="UTF-8")
+  raw_yaml <- yaml.load(paste(readLines(con), collapse="\n"))
+  close(con)
   temp <- lapply(raw_yaml[-1], newrow)
   df <- NULL
   for(row in temp){
